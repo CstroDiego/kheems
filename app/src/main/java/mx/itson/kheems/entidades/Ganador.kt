@@ -3,57 +3,68 @@ package mx.itson.kheems.entidades
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import mx.itson.kheems.persistencia.KheemsDB
 
-@SuppressLint("StaticFieldLeak")
-object Ganador { var id: Int = 0
-    var nombre: String? = null
-    var intentos: Int = 0
+data class Ganador(
+    var id: Int = 0,
+    var nombre: String? = null,
+    var intentos: Int = 0,
     var puntos: Int = 0
+) {
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        private lateinit var contexto: Context
+        private lateinit var baseDatos: SQLiteDatabase
 
-    private lateinit var contexto: Context
-    private lateinit var baseDatos: SQLiteDatabase
-
-    fun inicializar(context: Context) {
-        contexto = context.applicationContext
-        val bonkDB = KheemsDB(contexto, "KheemsDB", null, 1)
-        baseDatos = bonkDB.writableDatabase
-    }
-
-    fun guardar(context: Context, nombre: String?, intentos: Int, puntos: Int) {
-        inicializar(context)
-        try {
-            val valores = ContentValues()
-            valores.put("nombre", nombre)
-            valores.put("intentos", intentos)
-            valores.put("puntos", puntos)
-            baseDatos.insert("Ganador", null, valores)
-        } catch (ex: Exception) {
-            Log.e("ocurrio un error al guardar ganador", ex.toString())
+        fun inicializar(context: Context) {
+            contexto = context.applicationContext
+            val bonkDB = KheemsDB(contexto, "KheemsDB", null, 1)
+            baseDatos = bonkDB.writableDatabase
         }
-    }
 
-    fun obtenerTodos(context: Context): List<Ganador> {
-        inicializar(context)
-        val ganadores: MutableList<Ganador> = ArrayList()
-        try {
-            val cursor =
-                baseDatos.rawQuery("SELECT id, nombre, intentos, puntos FROM ganador", null)
-            while (cursor.moveToNext()) {
-                val ganador = Ganador.apply {
-                    id = cursor.getInt(0)
-                    nombre = cursor.getString(1)
-                    intentos = cursor.getInt(2)
-                    puntos = cursor.getInt(3)
-                }
-                ganadores.add(ganador)
+        fun guardar(nombre: String?, intentos: Int, puntos: Int) {
+            if (!::baseDatos.isInitialized) {
+                Log.e("Ganador", "La base de datos no ha sido inicializada")
+                return
             }
-            cursor.close()
-        } catch (ex: Exception) {
-            Log.e("ocurrio un error al obtener ganador", ex.toString())
+            try {
+                val valores = ContentValues()
+                valores.put("nombre", nombre)
+                valores.put("intentos", intentos)
+                valores.put("puntos", puntos)
+                baseDatos.insert("ganador", null, valores)
+            } catch (ex: Exception) {
+                Log.e("ocurrio un error al guardar ganador", ex.toString())
+            }
         }
-        return ganadores
+
+        fun obtenerTodos(): List<Ganador> {
+            if (!::baseDatos.isInitialized) {
+                Log.e("Ganador", "La base de datos no ha sido inicializada")
+                return emptyList()
+            }
+            val ganadores: MutableList<Ganador> = ArrayList()
+            try {
+                val cursor: Cursor = baseDatos.rawQuery("SELECT * FROM ganador", null)
+                if (cursor.moveToFirst()) {
+                    do {
+                        val ganador = Ganador(
+                            cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getInt(2),
+                            cursor.getInt(3)
+                        )
+                        ganadores.add(ganador)
+                    } while (cursor.moveToNext())
+                }
+                cursor.close()
+            } catch (ex: Exception) {
+                Log.e("ocurrio un error al obtener ganadores", ex.toString())
+            }
+            return ganadores
+        }
     }
 }

@@ -16,4 +16,6 @@
     <string name="opcion_10">Opcion 10</string>
     <string name="opcion_11">Opcion 11</string>
     <string name="opcion_12">Opcion 12</string>
+    <string name="format_puntos">"Puntos: "</string>
+    <string name="format_intentos">"No. de intentos: "</string>
 </resources>
