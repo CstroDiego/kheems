@@ -19,7 +19,7 @@ class GanadorListActivity : AppCompatActivity() {
     }
 
     private fun cargarLista() {
-        val ganadores: List<Ganador> = Ganador.obtenerTodos()
+        val ganadores: List<Ganador> = Ganador.obtenerTodos(this)
         val adapter = GanadorAdapter(this, ganadores)
         listaGanadores?.adapter = adapter
     }

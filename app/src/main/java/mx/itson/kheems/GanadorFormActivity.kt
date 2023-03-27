@@ -24,7 +24,7 @@ class GanadorFormActivity : AppCompatActivity() {
     private fun guardarGanador() {
         try {
             val nombre = findViewById<EditText>(R.id.txtNombre).text.toString()
-            Ganador.guardar( nombre, intentos, puntos)
+            Ganador.guardar(this, nombre, intentos, puntos)
             Toast.makeText(this, "Ganador agregado correctamente", Toast.LENGTH_SHORT).show()
             finish()
         } catch (ex: Exception) {

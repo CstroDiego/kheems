@@ -19,17 +19,12 @@ data class Ganador(
         private lateinit var contexto: Context
         private lateinit var baseDatos: SQLiteDatabase
 
-        fun inicializar(context: Context) {
-            contexto = context.applicationContext
-            val bonkDB = KheemsDB(contexto, "KheemsDB", null, 1)
-            baseDatos = bonkDB.writableDatabase
-        }
+        fun guardar(context: Context, nombre: String?, intentos: Int, puntos: Int) {
 
-        fun guardar(nombre: String?, intentos: Int, puntos: Int) {
-            if (!::baseDatos.isInitialized) {
-                Log.e("Ganador", "La base de datos no ha sido inicializada")
-                return
-            }
+            contexto = context.applicationContext
+            val kheemsDB = KheemsDB(contexto, "KheemsDB", null, 1)
+            baseDatos = kheemsDB.writableDatabase
+
             try {
                 val valores = ContentValues()
                 valores.put("nombre", nombre)
@@ -41,11 +36,12 @@ data class Ganador(
             }
         }
 
-        fun obtenerTodos(): List<Ganador> {
-            if (!::baseDatos.isInitialized) {
-                Log.e("Ganador", "La base de datos no ha sido inicializada")
-                return emptyList()
-            }
+        fun obtenerTodos(context: Context): List<Ganador> {
+
+            contexto = context.applicationContext
+            val kheemsDB = KheemsDB(context, "KheemsDB", null, 1)
+            val baseDatos = kheemsDB.readableDatabase
+
             val ganadores: MutableList<Ganador> = ArrayList()
             try {
                 val cursor: Cursor = baseDatos.rawQuery("SELECT * FROM ganador", null)
