@@ -6,6 +6,11 @@ import android.widget.ListView
 import mx.itson.kheems.adapters.GanadorAdapter
 import mx.itson.kheems.entidades.Ganador
 
+/**
+ * Ganador list activity
+ *
+ * @constructor Create empty Ganador list activity
+ */
 class GanadorListActivity : AppCompatActivity() {
 
     private var listaGanadores: ListView? = null
@@ -18,6 +23,10 @@ class GanadorListActivity : AppCompatActivity() {
         cargarLista()
     }
 
+    /**
+     * Carga la lista de ganadores
+     *
+     */
     private fun cargarLista() {
         val ganadores: List<Ganador> = Ganador.obtenerTodos(this).sortedWith(compareBy({ it.puntos }, { it.nombre }))
             .take(10)

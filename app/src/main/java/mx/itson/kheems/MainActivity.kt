@@ -11,7 +11,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import java.util.*
 
-class MainActivity : AppCompatActivity() , View.OnClickListener {
+/**
+ * Main activity
+ *
+ * @constructor Create empty Main activity
+ */
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var ubicacion = 0
     private var aciertos = 0
@@ -47,6 +52,10 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         }
     }
 
+    /**
+     * Inicializa el juego
+     *
+     */
     @SuppressLint("DiscouragedApi")
     private fun iniciarJuego() {
         // Asigna el icono de pregunta a todas las opciones.
@@ -80,6 +89,11 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         Toast.makeText(this, "ubicacion $ubicacion", Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Destapa la carta seleccionada
+     *
+     * @param opcion La opción seleccionada
+     */
     @SuppressLint("DiscouragedApi")
     private fun destapar(opcion: Int) {
 
@@ -164,15 +178,12 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
 
     }
 
-    private fun ganadores() {
-        Toast.makeText(this, "Bienvenido al salon de la fama", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, GanadorListActivity::class.java)
-        startActivity(intent)
-    }
-
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.btnGanadores -> ganadores()
+            R.id.btnGanadores -> {
+                val intent = Intent(this, GanadorListActivity::class.java)
+                startActivity(intent)
+            }
             R.id.btnReiniciar -> iniciarJuego()
             R.id.opcion1 -> destapar(1)
             R.id.opcion2 -> destapar(2)
