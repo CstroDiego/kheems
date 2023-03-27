@@ -19,7 +19,8 @@ class GanadorListActivity : AppCompatActivity() {
     }
 
     private fun cargarLista() {
-        val ganadores: List<Ganador> = Ganador.obtenerTodos(this)
+        val ganadores: List<Ganador> = Ganador.obtenerTodos(this).sortedWith(compareBy({ it.puntos }, { it.nombre }))
+            .take(10)
         val adapter = GanadorAdapter(this, ganadores)
         listaGanadores?.adapter = adapter
     }
