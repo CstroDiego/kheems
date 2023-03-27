@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Kheems</string>
+    <string name="texto_reiniciar">Reiniciar</string>
+    <string name="texto_ganador_nombre">Nombre</string>
+    <string name="txt_ganador_guardar">Guardar</string>
+    <string name="texto_ver_ganadores">Ver ganadores</string>
+    <string name="opcion_1">Opcion 1</string>
+    <string name="opcion_2">Opcion 2</string>
+    <string name="opcion_3">Opcion 3</string>
+    <string name="opcion_4">Opcion 4</string>
+    <string name="opcion_5">Opcion 5</string>
+    <string name="opcion_6">Opcion 6</string>
+    <string name="opcion_7">Opcion 7</string>
+    <string name="opcion_8">Opcion 8</string>
+    <string name="opcion_9">Opcion 9</string>
+    <string name="opcion_10">Opcion 10</string>
+    <string name="opcion_11">Opcion 11</string>
+    <string name="opcion_12">Opcion 12</string>
+</resources>
