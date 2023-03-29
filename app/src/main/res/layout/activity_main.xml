@@ -121,6 +121,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnReiniciar"
         android:text="@string/texto_reiniciar"
+        android:textColor="#FFF"
         android:layout_marginTop="50dp"
         android:layout_gravity="center" />
 
@@ -129,6 +130,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnGanadores"
         android:text="@string/texto_ver_ganadores"
+        android:textColor="#FFF"
         android:layout_marginTop="25dp"
         android:layout_gravity="center" />
 

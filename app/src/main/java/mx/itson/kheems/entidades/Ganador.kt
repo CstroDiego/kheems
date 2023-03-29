@@ -83,6 +83,7 @@ data class Ganador(
                 // Si el cursor tiene al menos un registro, iterar sobre los resultados
                 if (cursor.moveToFirst()) {
                     do {
+
                         // Crear un objeto Ganador con los datos del registro actual
                         val ganador = Ganador(
                             cursor.getInt(0),

@@ -7,9 +7,9 @@ import mx.itson.kheems.adapters.GanadorAdapter
 import mx.itson.kheems.entidades.Ganador
 
 /**
- * Ganador list activity
+ * Lista de ganadores
  *
- * @constructor Create empty Ganador list activity
+ * @constructor Crear una nueva actividad de lista de ganadores
  */
 class GanadorListActivity : AppCompatActivity() {
 

@@ -1,6 +1,7 @@
 package mx.itson.kheems
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import mx.itson.kheems.entidades.Ganador
 
 /**
- * Clase GanadorFormActivity: esta clase define una actividad para guardar un ganador en la base de datos
+ * Esta clase define una actividad para guardar un ganador en la base de datos
  * @author Diego Castro
  *
  * @constructor Crea una nueva actividad de formulario de ganador
@@ -32,7 +33,7 @@ class GanadorFormActivity : AppCompatActivity() {
 
 
     /**
-     * Método guardarGanador: guarda el ganador en la base de datos y muestra un mensaje de éxito
+     * Guarda el ganador en la base de datos y muestra un mensaje de éxito
      */
     private fun guardarGanador() {
         try {
@@ -43,12 +44,17 @@ class GanadorFormActivity : AppCompatActivity() {
             Ganador.guardar(this, nombre, intentos, puntos)
 
             // Muestra un mensaje de éxito y cierra esta actividad
-            Toast.makeText(this, "Ganador agregado correctamente", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Bonk!", Toast.LENGTH_SHORT).show()
+            Log.i(
+                "Ganador registrado correctamente",
+                "Nombre: $nombre, Intentos: $intentos, Puntos: $puntos"
+            )
             finish()
         } catch (ex: Exception) {
             // Muestra un mensaje de error en caso de que ocurra una excepción al guardar el ganador
-            Toast.makeText(this, "Ocurrió un error al agregar el ganador", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Ocurrió un error al registrar el ganador", Toast.LENGTH_SHORT)
                 .show()
+            Log.e("ocurrio un error al guardar ganador", ex.toString())
         }
     }
 }

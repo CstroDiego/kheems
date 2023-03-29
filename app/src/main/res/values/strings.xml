@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kheems</string>
     <string name="texto_reiniciar">Reiniciar</string>
-    <string name="texto_ganador_nombre">Nombre</string>
+    <string name="texto_ganador_nombre">Registra tu nombre para ingresar al salon de la fama de Kheems</string>
     <string name="txt_ganador_guardar">Guardar</string>
     <string name="texto_ver_ganadores">Ver ganadores</string>
     <string name="opcion_1">Opcion 1</string>
@@ -18,4 +18,7 @@
     <string name="opcion_12">Opcion 12</string>
     <string name="format_puntos">"Puntos: "</string>
     <string name="format_intentos">"No. de intentos: "</string>
+    <string name="todo">TODO</string>
+    <string name="texto_felicidades">Felicidades</string>
+    <string name="texto_ganador">¡GAMNASTE!</string>
 </resources>

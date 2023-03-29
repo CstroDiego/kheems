@@ -13,8 +13,9 @@ import java.util.*
 
 /**
  * Main activity
+ * @author Diego Castro
  *
- * @constructor Create empty Main activity
+ * @constructor Crea un nuevo main activity
  */
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -43,9 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         for (i in 1..12) {
             val btnSeleccion = findViewById<View>(
                 resources.getIdentifier(
-                    "opcion$i",
-                    "id",
-                    this.packageName
+                    "opcion$i", "id", this.packageName
                 )
             ) as ImageButton
             btnSeleccion.setOnClickListener(this)
@@ -62,9 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         for (i in 1..12) {
             val btnSeleccion = findViewById<View>(
                 resources.getIdentifier(
-                    "opcion$i",
-                    "id",
-                    this.packageName
+                    "opcion$i", "id", this.packageName
                 )
             ) as ImageButton
             btnSeleccion.setBackgroundResource(R.drawable.icon_pregunta)
@@ -80,13 +77,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // En caso de haber, sumamos los puntos obtenidos en el juego anterior.
         puntos += aciertos
 
+        // Se valida que el número de intentos sea mayor a 0 para empezar a sumar los intentos.
+        if (puntos > 0) {
+            intentos++
+        }
+
         // Reinicia el contador de aciertos.
         aciertos = 0
 
         // Genera un número aleatorio entre 1 y 12 para la carta perdedora.
         val random = Random()
         ubicacion = random.nextInt(12) + 1
-        Toast.makeText(this, "ubicacion $ubicacion", Toast.LENGTH_LONG).show()
+        Log.w("ubicacion", ubicacion.toString())
     }
 
     /**
@@ -102,9 +104,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             for (i in 1..12) {
                 val btnSeleccion = findViewById<View>(
                     resources.getIdentifier(
-                        "opcion$i",
-                        "id",
-                        this.packageName
+                        "opcion$i", "id", this.packageName
                     )
                 ) as ImageButton
 
@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                     btnSeleccion.setBackgroundResource(R.drawable.icon_cheems_llora)
                     Toast.makeText(this, "¡PERMDISTE!", Toast.LENGTH_LONG).show()
+
                 } else {
                     btnSeleccion.setBackgroundResource(R.drawable.icon_cheems)
                 }
@@ -124,9 +125,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             // Se destapa la carta seleccionada.
             val btnSeleccion = findViewById<View>(
                 resources.getIdentifier(
-                    "opcion$opcion",
-                    "id",
-                    this.packageName
+                    "opcion$opcion", "id", this.packageName
                 )
             ) as ImageButton
             btnSeleccion.setBackgroundResource(R.drawable.icon_cheems)
@@ -134,9 +133,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             // Se deshabilita la opción seleccionada.
             val btnSeleccionado = findViewById<View>(
                 resources.getIdentifier(
-                    "opcion$opcion",
-                    "id",
-                    this.packageName
+                    "opcion$opcion", "id", this.packageName
                 )
             ) as ImageButton
             btnSeleccionado.isEnabled = false
@@ -149,9 +146,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "¡GAMNASTE!", Toast.LENGTH_LONG).show()
                 val btnGanador = findViewById<View>(
                     resources.getIdentifier(
-                        "opcion$ubicacion",
-                        "id",
-                        this.packageName
+                        "opcion$ubicacion", "id", this.packageName
                     )
                 ) as ImageButton
                 btnGanador.setBackgroundResource(R.drawable.icon_cheems_ganador)
@@ -198,5 +193,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.opcion11 -> destapar(11)
             R.id.opcion12 -> destapar(12)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniciarJuego()
     }
 }

@@ -38,7 +38,7 @@ class KheemsDB(
                         "(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre TEXT, intentos INTEGER, puntos INTEGER)"
             )
         } catch (ex: Exception) {
-            Log.e("ocurrio un error al crear la base de datos", ex.toString())
+            Log.e("DataBase", "Error al crear la base de datos", ex)
         }
     }
 
@@ -50,7 +50,7 @@ class KheemsDB(
      * @param newVersion Versión nueva de la base de datos
      */
     override fun onUpgrade(sqliteDatabase: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        Log.i("DataBase", "Actualizando base de datos")
+        Log.w("DataBase", "Actualizando base de datos")
         sqliteDatabase.execSQL("DROP TABLE IF EXISTS Ganador")
         onCreate(sqliteDatabase)
     }

@@ -22,12 +22,11 @@ import mx.itson.kheems.entidades.Ganador
  */
 class GanadorAdapter(
     context: Context,
-    ganadores: List<Ganador>
+    private var ganadores: List<Ganador> // La lista de objetos Ganador que se van a mostrar en la lista
 ) : BaseAdapter() {
 
-    var context: Context? = context // La instancia del contexto de la aplicación
-    var ganadores: List<Ganador> =
-        ganadores // La lista de objetos Ganador que se van a mostrar en la lista
+    // La instancia del contexto de la aplicación
+    private var context: Context? = context
 
     /**
      * Obtiene el número de elementos de la lista
